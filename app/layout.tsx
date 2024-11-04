@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Navbar from "@/components/common/Navbar";
-import Footer from "@/components/common/Footer"
+import Footer from "@/components/common/Footer";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs';
 
 export const metadata: Metadata = {
-  title: "BibleMap Explorer",
+  title: "BibleMap",
   description: "Explore the Bible interactively with BibleMap.",
 };
 
@@ -14,12 +21,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} dynamic
+    >
+      <html lang="en">
+        <head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet"
+          />
+        </head>
+        <body className="antialiased">
+          <Navbar />
+          <SignedOut>
+            <div className="flex justify-center mt-4">
+              <SignInButton />
+            </div>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
