@@ -2,13 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata: Metadata = {
   title: "BibleMap",
@@ -33,14 +27,6 @@ export default function RootLayout({
         </head>
         <body className="antialiased">
           <Navbar />
-          <SignedOut>
-            <div className="flex justify-center mt-4">
-              <SignInButton />
-            </div>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
           {children}
           <Footer />
         </body>

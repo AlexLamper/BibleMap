@@ -12,6 +12,16 @@ import {
 } from "@/components/ui/navigation-menu";
 import { FaBars } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
+import {
+    ClerkLoaded,
+    ClerkLoading,
+    SignedIn,
+    SignedOut,
+    SignInButton,
+    SignUpButton,
+    UserButton,
+} from '@clerk/nextjs';
+import GrayButton from '@/components/buttons/GrayButton';
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -46,28 +56,51 @@ const Navbar = () => {
                     <NavigationMenu>
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                            <NavigationMenuTrigger className="">
-                                <FaBars size={24} />
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <NavigationMenuList className="flex flex-col text-left -mr-6">
-                                    {pages.map((page) => (
-                                        <NavigationMenuItem key={page.path}>
-                                            <NavigationMenuLink asChild>
-                                                <Link
-                                                    href={page.path}
-                                                    className={`font-semibold text-left`}
-                                                >
-                                                    {page.name}
-                                                </Link>
-                                            </NavigationMenuLink>
-                                        </NavigationMenuItem>
-                                    ))}
-                                </NavigationMenuList>
-                            </NavigationMenuContent>
+                                <NavigationMenuTrigger className="">
+                                    <FaBars size={24} />
+                                </NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <NavigationMenuList className="flex flex-col text-left -mr-6">
+                                        {pages.map((page) => (
+                                            <NavigationMenuItem key={page.path}>
+                                                <NavigationMenuLink asChild>
+                                                    <Link
+                                                        href={page.path}
+                                                        className={`font-semibold text-left`}
+                                                    >
+                                                        {page.name}
+                                                    </Link>
+                                                </NavigationMenuLink>
+                                            </NavigationMenuItem>
+                                        ))}
+                                    </NavigationMenuList>
+                                </NavigationMenuContent>
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
+                </div>
+
+                {/* Auth Section */}
+                <div className="flex items-center h-full">
+                    <ClerkLoading>
+                        <div className="h-5 w-5 text-muted-foreground animate-spin" />
+                    </ClerkLoading>
+                    
+                    <ClerkLoaded>
+                        <div className="flex gap-x-3 items-center">
+                            <SignedIn>
+                                <UserButton />
+                            </SignedIn>
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                </SignInButton>
+                                <SignUpButton mode="modal">
+                                    <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                </SignUpButton>
+                            </SignedOut>
+                        </div>
+                    </ClerkLoaded>
                 </div>
             </div>
         </nav>
