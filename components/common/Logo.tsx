@@ -36,13 +36,13 @@ const Logo = () => {
   return (
     <>
       <Link href="/" style={{ display: showButton ? "none" : "block" }}>
-        <Image
-        src="/logo/logo-text-no-bg.png"
-        alt="Logo"
-        width={width < 1024 ? 150 : 250} // Removing quotes for numeric values
-        height={width < 1024 ? 45 : 74} // Removing quotes for numeric values
-        className="h-auto" // Ensuring the logo maintains aspect ratio
-        />
+      <Image
+          src="/logo/logo-no-bg.png"
+          alt="Logo"
+          width={width < 1024 ? 100 : 200}
+          height={width < 1024 ? 30 : 60}
+          className="h-auto"
+      />
     </Link>
     <div
         style={{
