@@ -15,6 +15,14 @@ import {
 import GrayButton from '@/components/buttons/GrayButton';
 import { FaBars } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -27,14 +35,16 @@ const Navbar = () => {
     const pages = [
         { name: 'Home', path: '/' },
         { name: 'About', path: '/about' },
+        { name: 'Notes', path: '/notes' },
+        { name: 'Leaderboard', path: '/leaderboard' },
+    ];
+
+    const dropdownItems = [
         { name: 'Chapters', path: '/chapters' },
         { name: 'Places', path: '/places' },
         { name: 'Characters', path: '/characters' },
         { name: 'Events', path: '/events' },
         { name: 'Themes', path: '/themes' },
-        { name: 'Teachings', path: '/teachings' },
-        { name: 'Notes', path: '/notes' },
-        { name: 'Leaderboard', path: '/leaderboard' },
     ];
 
     return (
@@ -64,6 +74,24 @@ const Navbar = () => {
                                     </Link>
                                 </li>
                             ))}
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <p className="text-gray-300 hover:text-gray-100 transition duration-150 cursor-pointer">
+                                        More
+                                    </p>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>Explore</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    {dropdownItems.map((item) => (
+                                        <DropdownMenuItem key={item.path}>
+                                            <Link href={item.path}>
+                                                {item.name}
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </ul>
                         {/* Auth Section for Larger Screens */}
                         <div className="hidden md:flex items-center space-x-4">
@@ -105,6 +133,24 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         ))}
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <p className="text-gray-300 hover:text-gray-100 transition duration-150 cursor-pointer">
+                                    More
+                                </p>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>Explore</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                {dropdownItems.map((item) => (
+                                    <DropdownMenuItem key={item.path}>
+                                        <Link href={item.path}>
+                                            {item.name}
+                                        </Link>
+                                    </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                         <ClerkLoading>
                             <div className="h-5 w-5 text-gray-400 animate-spin" />
                         </ClerkLoading>
