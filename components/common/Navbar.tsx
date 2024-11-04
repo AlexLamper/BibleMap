@@ -1,4 +1,4 @@
-"use client"; // This directive indicates a client component
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -39,22 +39,28 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="w-full h-20 bg-black bg-opacity-40 sticky top-0">
+            <div className="w-full h-20 bg-gray-900 shadow-lg sticky top-0 z-20">
                 <div className="container mx-auto px-4 h-full">
                     <div className="flex justify-between items-center h-full">
                         <Logo />
                         <button
                             type="button"
-                            className="inline-flex items-center md:hidden"
+                            className="inline-flex items-center md:hidden text-gray-300"
                             onClick={toggle}
                         >
-                            <FaBars size={24} color="#fff" />
+                            <FaBars size={24} />
                         </button>
-                        <ul className="hidden md:flex gap-x-6 text-white">
+                        <ul className="hidden md:flex gap-x-6 text-gray-200">
                             {pages.map((page) => (
                                 <li key={page.path}>
-                                    <Link href={page.path} className={`text-white ${pathname === page.path ? 'underline' : ''}`}>
-                                        {page.name}
+                                    <Link href={page.path}>
+                                        <p
+                                            className={`text-gray-300 hover:text-gray-100 transition duration-150 ${
+                                                pathname === page.path ? 'border-b-2 border-teal-400' : ''
+                                            }`}
+                                        >
+                                            {page.name}
+                                        </p>
                                     </Link>
                                 </li>
                             ))}
@@ -62,7 +68,7 @@ const Navbar = () => {
                         {/* Auth Section for Larger Screens */}
                         <div className="hidden md:flex items-center space-x-4">
                             <ClerkLoading>
-                                <div className="h-5 w-5 text-muted-foreground animate-spin" />
+                                <div className="h-5 w-5 text-gray-400 animate-spin" />
                             </ClerkLoading>
                             <ClerkLoaded>
                                 <SignedIn>
@@ -73,7 +79,7 @@ const Navbar = () => {
                                         <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
                                     </SignInButton>
                                     <SignUpButton mode="modal">
-                                        <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                        <GrayButton title="Sign Up" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
                                     </SignUpButton>
                                 </SignedOut>
                             </ClerkLoaded>
@@ -84,17 +90,23 @@ const Navbar = () => {
 
             {/* Mobile Dropdown Menu */}
             {isOpen && (
-                <div className="absolute left-0 right-0 top-20 z-10 bg-gray-800">
-                    <ul className="flex flex-col items-center text-white gap-y-4 py-4">
+                <div className="absolute left-0 right-0 top-20 z-10 bg-gray-800 shadow-lg">
+                    <ul className="flex flex-col items-center text-gray-200 gap-y-4 py-4">
                         {pages.map((page) => (
                             <li key={page.path}>
-                                <Link href={page.path} className={`text-white ${pathname === page.path ? 'underline' : ''}`}>
-                                    {page.name}
+                                <Link href={page.path}>
+                                    <p
+                                        className={`text-gray-300 hover:text-gray-100 transition duration-150 ${
+                                            pathname === page.path ? 'border-b-2 border-teal-400' : ''
+                                        }`}
+                                    >
+                                        {page.name}
+                                    </p>
                                 </Link>
                             </li>
                         ))}
                         <ClerkLoading>
-                            <div className="h-5 w-5 text-muted-foreground animate-spin" />
+                            <div className="h-5 w-5 text-gray-400 animate-spin" />
                         </ClerkLoading>
                         <ClerkLoaded>
                             <div className="flex flex-col items-center">
@@ -107,7 +119,7 @@ const Navbar = () => {
                                             <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
                                         </SignInButton>
                                         <SignUpButton mode="modal">
-                                            <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                            <GrayButton title="Sign Up" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
                                         </SignUpButton>
                                     </div>
                                 </SignedOut>
