@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/styles/globals.css"
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Bible Map",
-  description: "A application to explore the Bible",
+  title: "BibleMap Explorer",
+  description: "Explore the Bible interactively with BibleMap.",
 };
 
 export default function RootLayout({
@@ -25,10 +26,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <header className="bg-gray-800 text-white p-4">
+          <h1 className="text-2xl">BibleMap Explorer</h1>
+          <nav>
+            <ul className="flex space-x-4">
+              <li><Link href="/chapters">Chapters</Link></li>
+              <li><Link href="/places">Places</Link></li>
+              <li><Link href="/characters">Characters</Link></li>
+              <li><Link href="/events">Events</Link></li>
+              <li><Link href="/themes">Themes</Link></li>
+              <li><Link href="/teachings">Teachings</Link></li>
+              <li><Link href="/notes">Notes</Link></li>
+              <li><Link href="/leaderboard">Leaderboard</Link></li>
+              <li><Link href="/settings">Settings</Link></li>
+              <li><Link href="/help">Help/FAQ</Link></li>
+              <li><Link href="/about">About</Link></li>
+            </ul>
+          </nav>
+        </header>
+        <main>{children}</main>
+        <footer className="bg-gray-800 text-white p-4 text-center">
+          <p>&copy; {new Date().getFullYear()} BibleMap. All rights reserved.</p>
+        </footer>
       </body>
     </html>
   );
