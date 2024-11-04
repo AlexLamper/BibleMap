@@ -1,17 +1,8 @@
 "use client"; // This directive indicates a client component
 
-import React from 'react';
-import Link from 'next/link';
-import {
-    NavigationMenu,
-    NavigationMenuList,
-    NavigationMenuItem,
-    NavigationMenuTrigger,
-    NavigationMenuContent,
-    NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
-import { FaBars } from 'react-icons/fa';
-import { usePathname } from 'next/navigation';
+import React, { useState } from "react";
+import Link from "next/link";
+import Logo from "@/components/common/Logo";
 import {
     ClerkLoaded,
     ClerkLoading,
@@ -22,9 +13,16 @@ import {
     UserButton,
 } from '@clerk/nextjs';
 import GrayButton from '@/components/buttons/GrayButton';
+import { FaBars } from 'react-icons/fa';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
     const pathname = usePathname();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
 
     const pages = [
         { name: 'Home', path: '/' },
@@ -40,70 +38,85 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="bg-gray-800 p-4">
-            <div className="container mx-auto flex justify-between items-center">
-                <div className="text-white text-2xl font-bold">
-                    <Link href="/">BibleMap</Link>
-                </div>
-                <div className="hidden md:flex space-x-4">
-                    {pages.map((page) => (
-                        <Link key={page.path} href={page.path} className={`text-white ${pathname === page.path ? 'underline' : ''}`}>
-                            {page.name}
-                        </Link>
-                    ))}
-                </div>
-                <div className="md:hidden">
-                    <NavigationMenu>
-                        <NavigationMenuList>
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger className="">
-                                    <FaBars size={24} />
-                                </NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <NavigationMenuList className="flex flex-col text-left -mr-6">
-                                        {pages.map((page) => (
-                                            <NavigationMenuItem key={page.path}>
-                                                <NavigationMenuLink asChild>
-                                                    <Link
-                                                        href={page.path}
-                                                        className={`font-semibold text-left`}
-                                                    >
-                                                        {page.name}
-                                                    </Link>
-                                                </NavigationMenuLink>
-                                            </NavigationMenuItem>
-                                        ))}
-                                    </NavigationMenuList>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-
-                {/* Auth Section */}
-                <div className="flex items-center h-full">
-                    <ClerkLoading>
-                        <div className="h-5 w-5 text-muted-foreground animate-spin" />
-                    </ClerkLoading>
-                    
-                    <ClerkLoaded>
-                        <div className="flex gap-x-3 items-center">
-                            <SignedIn>
-                                <UserButton />
-                            </SignedIn>
-                            <SignedOut>
-                                <SignInButton mode="modal">
-                                    <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
-                                </SignInButton>
-                                <SignUpButton mode="modal">
-                                    <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
-                                </SignUpButton>
-                            </SignedOut>
+        <>
+            <div className="w-full h-20 bg-black bg-opacity-40 sticky top-0">
+                <div className="container mx-auto px-4 h-full">
+                    <div className="flex justify-between items-center h-full">
+                        <Logo />
+                        <button
+                            type="button"
+                            className="inline-flex items-center md:hidden"
+                            onClick={toggle}
+                        >
+                            <FaBars size={24} color="#fff" />
+                        </button>
+                        <ul className="hidden md:flex gap-x-6 text-white">
+                            {pages.map((page) => (
+                                <li key={page.path}>
+                                    <Link href={page.path} className={`text-white ${pathname === page.path ? 'underline' : ''}`}>
+                                        {page.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        {/* Auth Section for Larger Screens */}
+                        <div className="hidden md:flex items-center space-x-4">
+                            <ClerkLoading>
+                                <div className="h-5 w-5 text-muted-foreground animate-spin" />
+                            </ClerkLoading>
+                            <ClerkLoaded>
+                                <SignedIn>
+                                    <UserButton />
+                                </SignedIn>
+                                <SignedOut>
+                                    <SignInButton mode="modal">
+                                        <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                    </SignInButton>
+                                    <SignUpButton mode="modal">
+                                        <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                    </SignUpButton>
+                                </SignedOut>
+                            </ClerkLoaded>
                         </div>
-                    </ClerkLoaded>
+                    </div>
                 </div>
             </div>
-        </nav>
+
+            {/* Mobile Dropdown Menu */}
+            {isOpen && (
+                <div className="absolute left-0 right-0 top-20 z-10 bg-gray-800">
+                    <ul className="flex flex-col items-center text-white gap-y-4 py-4">
+                        {pages.map((page) => (
+                            <li key={page.path}>
+                                <Link href={page.path} className={`text-white ${pathname === page.path ? 'underline' : ''}`}>
+                                    {page.name}
+                                </Link>
+                            </li>
+                        ))}
+                        <ClerkLoading>
+                            <div className="h-5 w-5 text-muted-foreground animate-spin" />
+                        </ClerkLoading>
+                        <ClerkLoaded>
+                            <div className="flex flex-col items-center">
+                                <SignedIn>
+                                    <UserButton />
+                                </SignedIn>
+                                <SignedOut>
+                                    <div className="flex flex-col gap-y-2">
+                                        <SignInButton mode="modal">
+                                            <GrayButton title="Login" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                        </SignInButton>
+                                        <SignUpButton mode="modal">
+                                            <GrayButton title="SignUp" height="h-[2.8rem] p-4" fontSize="text-[1rem]" />
+                                        </SignUpButton>
+                                    </div>
+                                </SignedOut>
+                            </div>
+                        </ClerkLoaded>
+                    </ul>
+                </div>
+            )}
+        </>
     );
 };
 
