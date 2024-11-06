@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import Navbar from "@/components/common/Navbar";
+import Navbar2 from "@/components/common/Navbar2";
 import Footer from "@/components/common/Footer";
 import { ClerkProvider } from '@clerk/nextjs';
 
@@ -26,7 +26,7 @@ export default function RootLayout({
           />
         </head>
         <body className="antialiased">
-          <Navbar />
+          <Navbar2 />
           {children}
           <Footer />
         </body>

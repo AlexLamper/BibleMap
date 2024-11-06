@@ -12,7 +12,7 @@ import {
     SignUpButton,
     UserButton,
 } from '@clerk/nextjs';
-import GrayButton from '@/components/buttons/GrayButton';
+import GrayButton from '@/components/buttons/BrownButton';
 import { FaBars } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import {

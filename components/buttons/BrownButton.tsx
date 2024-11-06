@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-interface GrayButtonProps {
+interface BrownButtonProps {
   title: string;
   width?: string;
   height?: string;
@@ -11,7 +11,7 @@ interface GrayButtonProps {
   onClick?: () => void;
 }
 
-const GrayButton: React.FC<GrayButtonProps> = ({
+const BrownButton: React.FC<BrownButtonProps> = ({
   title,
   width = 'w-full max-w-[12rem] min-w-[8rem]',
   height = 'h-[2.8rem] p-4',
@@ -22,7 +22,7 @@ const GrayButton: React.FC<GrayButtonProps> = ({
   const buttonContent = (
     <div
       className={clsx(
-        "bg-[#d9d9d921] text-white transition-colors duration-300 hover:bg-[#d9d9d94f] text-center cursor-pointer shadow-md shadow-[#00000050] rounded-[0.5rem] flex items-center justify-center border dark:bg-[#508D4E] dark:text-white dark:border-none dark:hover:bg-opacity-80",
+        "bg-[#9A6D53] text-white transition-colors duration-300 hover:bg-[#A67B5B] text-center cursor-pointer shadow-md shadow-[#85858550] rounded-[0.5rem] flex items-center justify-center border dark:bg-[#508D4E] dark:text-white dark:border-none dark:hover:bg-opacity-80",
         width,
         height
       )}
@@ -51,4 +51,4 @@ const GrayButton: React.FC<GrayButtonProps> = ({
   );
 };
 
-export default GrayButton;
+export default BrownButton;
