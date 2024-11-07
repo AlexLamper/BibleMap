@@ -6,7 +6,6 @@ type ImageProps = {
 };
 
 type Props = {
-  heading: string;
   description: string;
   image: ImageProps;
 };
@@ -14,7 +13,7 @@ type Props = {
 export type GuestHeroProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
 
 export const GuestHero = (props: GuestHeroProps) => {
-  const { heading, description, image } = {
+  const { description, image } = {
     ...GuestHeroDefaults,
     ...props,
   } as Props;
@@ -25,7 +24,7 @@ export const GuestHero = (props: GuestHeroProps) => {
           <div className="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
             <div className="w-full max-w-lg">
               <h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">
-                {heading}
+                BibleMap, the number <span className="text-[#855940]">#1</span> Bible app
               </h1>
               <p className="md:text-md">{description}</p>
               <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
@@ -45,7 +44,6 @@ export const GuestHero = (props: GuestHeroProps) => {
 export default GuestHero;
 
 export const GuestHeroDefaults: GuestHeroProps = {
-  heading: "BibleMap, the number #1 Bible app",
   description:
     "BibleMap is the best Bible app for reading and studying the Bible. It is a great way to read, listen to, and share the Bible. Download the app now and start reading the Bible!",
   image: {

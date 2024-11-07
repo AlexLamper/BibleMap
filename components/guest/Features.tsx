@@ -100,7 +100,7 @@ export const Features = (props: FeaturesProps) => {
                       <img
                         src={tab.image.src}
                         alt={tab.image.alt}
-                        className="size-full object-cover"
+                        className="size-full object-cover rounded-xl"
                       />
                     )}
                     {tab.video && (
@@ -110,10 +110,10 @@ export const Features = (props: FeaturesProps) => {
                             <img
                               src={tab.video.image.src}
                               alt={tab.video.image.alt}
-                              className="size-full object-cover"
+                              className="size-full object-cover rounded-xl"
                             />
                             <FaCirclePlay className="absolute z-20 size-16 text-white" />
-                            <span className="absolute inset-0 z-10 bg-black/50" />
+                            <span className="absolute inset-0 z-10 bg-black/50 rounded-xl" />
                           </div>
                         </DialogTrigger>
                         <DialogPortal>
@@ -163,7 +163,7 @@ export const FeaturesDefaults: FeaturesProps = {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "/images/features/feature3.jpg",
         alt: "Relume placeholder image 1",
       },
     },
@@ -173,7 +173,7 @@ export const FeaturesDefaults: FeaturesProps = {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
       video: {
         image: {
-          src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail.svg",
+          src: "/images/features/feature1.jpg",
           alt: "Relume placeholder image 2",
         },
         url: "https://www.youtube.com/embed/8DKLYsikxTs?si=Ch9W0KrDWWUiCMMW",
@@ -184,7 +184,7 @@ export const FeaturesDefaults: FeaturesProps = {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "/images/features/feature1.jpg",
         alt: "Relume placeholder image 3",
       },
     },

@@ -2,6 +2,8 @@ import GuestHero from '@/components/guest/GuestHero'
 import React from 'react'
 import Features from '@/components/guest/Features'
 import CTA from '@/components/guest/CTA'
+import Pricing17 from '@/components/guest/Pricing'
+import Contact24 from '@/components/guest/Contact'
 
 const GuestPage = () => {
   return (
@@ -10,6 +12,8 @@ const GuestPage = () => {
             <GuestHero />
             <Features />
             <CTA />
+            <Pricing17 />
+            <Contact24 />
         </div>
     </div>
   )
