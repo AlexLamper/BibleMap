@@ -1,39 +1,39 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@nextui-org/spinner";
 import "@/styles/globals.css";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Hero from "@/components/home/Hero";
 
-export default function HomePage() {
-  const { user } = useUser();
+function GuestRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      router.push("/guest");
-    }
-  }, [user, router]);
+    router.push("/guest");
+  }, [router]);
 
+  return null;
+}
+function Page() {
   return (
-    <main className="flex items-center justify-center h-screen p-4">
-      <SignedIn>
-        <Hero />
-      </SignedIn>
+    <div>
       <SignedOut>
+        <GuestRedirect />
         <div className="flex flex-col items-center">
-          <div className="mb-6">
-            Loading the application...
-          </div>
+          <div className="mb-6">Loading the application...</div>
           <div>
             {/* Loading spinner */}
             <Spinner />
           </div>
         </div>
       </SignedOut>
-    </main>
+      <SignedIn>
+        <Hero />
+      </SignedIn>
+    </div>
   );
 }
+
+export default Page;
