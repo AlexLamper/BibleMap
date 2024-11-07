@@ -8,6 +8,7 @@ interface BrownButtonProps {
   height?: string;
   fontSize?: string;
   url?: string;
+  padding?: string;
   onClick?: () => void;
 }
 
@@ -16,6 +17,7 @@ const BrownButton: React.FC<BrownButtonProps> = ({
   width = 'w-full max-w-[12rem] min-w-[8rem]',
   height = 'h-[2.8rem] p-4',
   fontSize = 'text-[1.2rem]',
+  padding = 'p-6',
   url,
   onClick,
 }) => {
@@ -24,7 +26,8 @@ const BrownButton: React.FC<BrownButtonProps> = ({
       className={clsx(
         "bg-[#9A6D53] text-white transition-colors duration-300 hover:bg-[#A67B5B] text-center cursor-pointer shadow-md shadow-[#85858550] rounded-[0.5rem] flex items-center justify-center border dark:bg-[#508D4E] dark:text-white dark:border-none dark:hover:bg-opacity-80",
         width,
-        height
+        height,
+        padding
       )}
       onClick={onClick}
     >
