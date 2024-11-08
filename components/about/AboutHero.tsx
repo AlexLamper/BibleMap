@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
-import type { ButtonProps } from "@relume_io/relume-ui";
 import clsx from "clsx";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import TransparentButton from "../buttons/TransparentButton";
 
 type ImageProps = {
   src: string;
@@ -13,14 +13,13 @@ type ImageProps = {
 type Props = {
   heading: string;
   description: string;
-  buttons: ButtonProps[];
   images: ImageProps[];
 };
 
 export type Header83Props = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
 
 export const Header83 = (props: Header83Props) => {
-  const { heading, description, buttons, images } = {
+  const { heading, description, images } = {
     ...Header83Defaults,
     ...props,
   } as Props;
@@ -44,11 +43,13 @@ export const Header83 = (props: Header83Props) => {
               </h1>
               <p className="text-text-alternative md:text-md">{description}</p>
               <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
-                {buttons.map((button, index) => (
-                  <Button key={index} {...button}>
-                    {button.title}
-                  </Button>
-                ))}
+                <SignedIn>
+                  <TransparentButton title="Explore" url="/map/" />
+                </SignedIn>
+                <SignedOut>
+                  <TransparentButton title="Sign Up" url="/sign-up" />
+                  <TransparentButton title="See More" url="/" />
+                </SignedOut>
               </div>
             </div>
           </div>
@@ -87,10 +88,9 @@ export const Header83 = (props: Header83Props) => {
 export default Header83;
 
 export const Header83Defaults: Header83Props = {
-  heading: "Medium length hero heading goes here",
+  heading: "Learn More About BibleMap",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-  buttons: [{ title: "Button" }, { title: "Button", variant: "secondary-alt" }],
+    "BibleMap is a platform that allows you to explore the Bible in a new way. Dive into the stories and events of the Bible with our interactive maps and timelines.",
   images: [
     {
       src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",

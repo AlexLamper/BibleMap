@@ -1,10 +1,10 @@
 import React from "react";
+import NotesHero from "@/components/notes/NotesHero";
 
 const NotesPage = () => {
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-4">Notes</h1>
-      <p className="text-lg">A personal notes section for users to jot down insights or thoughts.</p>
+      <NotesHero />
     </div>
   );
 };
